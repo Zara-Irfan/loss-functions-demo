@@ -1,0 +1,93 @@
+"""
+Loss Functions Demonstration in Python
+Author: Your Name
+Date: YYYY-MM-DD
+Description: 
+    This script demonstrates common loss functions used in machine learning:
+    - Mean Absolute Error (MAE)
+    - Mean Squared Error (MSE)
+    - Log Loss / Binary Cross-Entropy
+    It includes implementations from scratch as well as using numpy.
+"""
+
+import numpy as np
+
+# -------------------------------
+# Sample Data
+# -------------------------------
+y_predicted = np.array([1, 1, 0, 0, 1])
+y_true = np.array([0.3, 0.7, 1, 0, 0.5])
+
+# -------------------------------
+# Mean Absolute Error (MAE)
+# -------------------------------
+def mae(y_true, y_predicted):
+    """
+    Compute Mean Absolute Error (MAE)
+    """
+    total_error = 0
+    for yt, yp in zip(y_true, y_predicted):
+        total_error += abs(yt - yp)
+    mae_value = total_error / len(y_true)
+    
+    print("=== MAE ===")
+    print("Total error:", total_error)
+    print("MAE:", mae_value)
+    print()
+    
+    return mae_value
+
+# Using custom function
+mae_value = mae(y_true, y_predicted)
+
+# Using NumPy
+mae_numpy = np.mean(np.abs(y_true - y_predicted))
+print("MAE (NumPy):", mae_numpy)
+print()
+
+# -------------------------------
+# Mean Squared Error (MSE)
+# -------------------------------
+def mse(y_true, y_predicted):
+    """
+    Compute Mean Squared Error (MSE)
+    """
+    total_error = 0
+    for yt, yp in zip(y_true, y_predicted):
+        total_error += (yt - yp) ** 2
+    mse_value = total_error / len(y_true)
+    
+    print("=== MSE ===")
+    print("Total squared error:", total_error)
+    print("MSE:", mse_value)
+    print()
+    
+    return mse_value
+
+mse_value = mse(y_true, y_predicted)
+mse_numpy = np.mean((y_true - y_predicted) ** 2)
+print("MSE (NumPy):", mse_numpy)
+print()
+
+# -------------------------------
+# Log Loss / Binary Cross-Entropy
+# -------------------------------
+def log_loss(y_true, y_predicted):
+    """
+    Compute Binary Cross-Entropy (Log Loss)
+    """
+    epsilon = 1e-15  # Small value to avoid log(0)
+    # Clip predictions to avoid log(0)
+    y_predicted_new = np.clip(y_predicted, epsilon, 1 - epsilon)
+    
+    loss = -np.mean(
+        y_true * np.log(y_predicted_new) + (1 - y_true) * np.log(1 - y_predicted_new)
+    )
+    
+    print("=== Log Loss / Binary Cross-Entropy ===")
+    print("Log Loss:", loss)
+    print()
+    
+    return loss
+
+log_loss_value = log_loss(y_true, y_predicted)
