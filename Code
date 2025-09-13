@@ -1,7 +1,6 @@
 """
 Loss Functions Demonstration in Python
-Author: Your Name
-Date: YYYY-MM-DD
+Author: Zara Irfan
 Description: 
     This script demonstrates common loss functions used in machine learning:
     - Mean Absolute Error (MAE)
